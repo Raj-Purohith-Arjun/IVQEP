@@ -60,11 +60,25 @@ The pipeline is streaming and frame-based, so it works for long videos too.
 
 ## 7) Architecture
 
-![IVQEP pipeline diagram showing flow from input video through preprocessing and optional DnCNN to output video and metrics](docs/ivqep-architecture.svg)
+```mermaid
+flowchart TD
+    A([Input Video\nLow-light frames]) --> B[Read frame with OpenCV]
+    B --> C[Convert frame to LAB color space]
+    C --> D[Apply CLAHE on L-channel]
+    D --> E[Apply Non-local-means denoising]
+    E --> F{DnCNN checkpoint\nprovided?}
+    F -- Yes --> G[Pass frame through DnCNN\nResidual CNN for deeper denoising]
+    F -- No  --> H[Write enhanced frame to Output Video]
+    G --> H
+    H --> I{Reference video\nprovided?}
+    I -- Yes --> J[Compute PSNR and SSIM\nagainst reference frame]
+    I -- No  --> K([End])
+    J --> K
+```
 
 Flow summary:
 
-`Input Video -> Frame Preprocessing -> (Optional) DnCNN -> Output Video + Metrics`
+`Input Video → Frame Preprocessing → (Optional) DnCNN → Output Video + Metrics`
 
 ## 8) Output / observations
 
