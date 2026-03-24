@@ -1,4 +1,4 @@
-# IVQEP — End-to-End Repor
+# IVQEP — Image & Video Quality Enhancement Pipeline
 
 ## 1) The problem
 
