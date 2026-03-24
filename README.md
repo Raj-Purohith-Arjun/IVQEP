@@ -60,7 +60,7 @@ The pipeline is streaming and frame-based, so it works for long videos too.
 
 ## 7) Architecture
 
-![IVQEP End-to-End Architecture](docs/ivqep-architecture.svg)
+![IVQEP pipeline diagram showing flow from input video through preprocessing and optional DnCNN to output video and metrics](docs/ivqep-architecture.svg)
 
 Flow summary:
 
